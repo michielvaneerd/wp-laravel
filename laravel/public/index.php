@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 // See also:
 // https://nehalist.io/integrating-laravel-into-wordpress/ ==> use WP functies inside Laravel
 // https://github.com/thiagof/wp-laravel ==> use Laravel functions inside Wordpress
-//require __DIR__ . '/wordpress/wp-load.php';
+// require __DIR__ . '/wordpress/wp-load.php';
 // MVE: end
 
 define('LARAVEL_START', microtime(true));

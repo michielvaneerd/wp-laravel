@@ -11,12 +11,16 @@ class PostsController extends Controller
         return Http::get(url('wordpress/index.php/wp-json/wp/v2' . $url))->json();
     }
 
+    private function getZiektebeelden() {
+        return $this->getFromWpApi('/ziektebeeld?_fields=id,name,slug,meta');
+    }
+
     public function getPosts() {
         if (function_exists('get_header')) {
             // WP has been included inside public/index.php, so we can use all WP functions like in WP templates.
             // Pro: we can use WP functions
             // Cons: - WP is loaded always - Clash of global functions like __() (WP takes precendence)
-            get_header();
+            //get_header();
             $posts = get_posts();
             dd($posts);
         } else {
@@ -25,8 +29,8 @@ class PostsController extends Controller
             // Pro: no direct mixing of WP and Laravel, __() function still exists in Laravel.
             
             //$response = Http::get(url('wordpress/index.php/wp-json/wp/v2/posts'));
-            die(__('validation.accepted', ['attribute' => 'Test']));
-            dd($this->getFromWpApi('/posts'));
+            //die(__('validation.accepted', ['attribute' => 'Test']));
+            dd($this->getZiektebeelden());
         }
     }
 }
