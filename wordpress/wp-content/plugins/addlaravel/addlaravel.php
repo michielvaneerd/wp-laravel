@@ -7,6 +7,7 @@ use Illuminate\Contracts\Http\Kernel;
 use App\Models\Stat;
 
 function my_laravel_start() {
+    // Almost the same as laravel/public/index.php
     require __DIR__ . '/../../../../laravel/vendor/autoload.php';
     $app = require_once __DIR__ . '/../../../../laravel/bootstrap/app.php';
     $kernel = $app->make(Kernel::class);
