@@ -1,0 +1,31 @@
+version: '3.3'
+
+services:
+  db:
+    image: mariadb
+    # connect from host with:
+    # mysql -hlocalhost -P3306 --protocol=tcp -uwordpress -p
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+  wordpress:
+    depends_on:
+      - db
+    image: chialab/php:8.0-apache
+    ports:
+      - "80:80"
+    restart: always
+    volumes:
+      - ./docker/vhost.conf:/etc/apache2/conf-enabled/myvhost.conf
+      - ./wordpress/:/var/www/html/wordpress
+      - ./laravel/:/var/www/html/laravel
+volumes:
+  db_data: {}
+  # wp: {}
