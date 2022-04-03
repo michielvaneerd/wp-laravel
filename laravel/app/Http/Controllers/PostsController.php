@@ -11,10 +11,6 @@ class PostsController extends Controller
         return Http::get(url('wordpress/index.php/wp-json/wp/v2' . $url))->json();
     }
 
-    private function getZiektebeelden() {
-        return $this->getFromWpApi('/ziektebeeld?_fields=id,name,slug,meta');
-    }
-
     public function getPosts() {
         if (function_exists('get_header')) {
             // WP has been included inside public/index.php, so we can use all WP functions like in WP templates.
@@ -28,9 +24,12 @@ class PostsController extends Controller
             // http://localhost/wordpress/index.php/wp-json/wp/v2
             // Pro: no direct mixing of WP and Laravel, __() function still exists in Laravel.
             
-            //$response = Http::get(url('wordpress/index.php/wp-json/wp/v2/posts'));
+            $posts = Http::get(url('wordpress/index.php/wp-json/wp/v2/posts'))->json();
+            return view('frontend.posts', [
+                'posts' => $posts
+            ]);
+            // do something with response...
             //die(__('validation.accepted', ['attribute' => 'Test']));
-            dd($this->getZiektebeelden());
         }
     }
 }

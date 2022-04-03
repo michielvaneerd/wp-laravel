@@ -1,7 +1,7 @@
-<h1>Hoi allemaal!</h1>
+<h1>This is a settings page from Laravel</h1>
 
 @foreach($stats as $stat)
-<p>Ja: {{ $stat->key }}</p>
+<p>Stat: {{ $stat->key }}</p>
 @endforeach
 
 {{ trans('validation.accepted', ['attribute' => 'Test']) }}
